@@ -1,0 +1,20 @@
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+.clear {
+	clear: both;
+}
+table, td, th {
+	border: 1px green solid;
+}
+#current th, #current td {
+	padding: 3px 10px;
+}
+.temp-red {
+	font-size: 1.2em;
+	color: red;
+	font-weight: bold;
+}

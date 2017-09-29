@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<!--<base href="/">-->
+	<title>metspider</title>
+	<meta name="description" content="metspider">
+	<!--<link rel="shortcut icon" href="/assets/favicons/favicon.ico">-->
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+</head>
+<body>
+
+<table id="current">
+	<tr>
+		<th colspan="2">
+			<span class="location">Lviv</span>,
+			<span class="provider">OpenWeatherMap</span>
+		</th>
+	</tr>
+	<tr>
+		<th class="description"></th>
+		<th><span class="temp temp-red"></span><span> °C</span></th>
+	</tr>
+	<tr>
+		<th>Humidity</th>
+		<td><span class="rh"></span><span> %</span></td>
+	</tr>
+	<tr>
+		<th>Pressure</th>
+		<td><span class="pressure"></span><span> hPa</span></td>
+	</tr>
+	<tr>
+		<th>Wind</th>
+		<td><span class="wind_speed"></span><span> m/s</span> from <span class="wind_direction"></span><span> degrees</span></td>
+	</tr>
+	<tr>
+		<th>Clouds</th>
+		<td><span class="clouds"></span><span> %</span></td>
+	</tr>
+	<tr>
+		<th>Visibility</th>
+		<td><span class="visibility"></span><span> m</span></td>
+	</tr>
+	<tr>
+		<th>Date</th>
+		<td class="dt">/td>
+	</tr>
+	<tr>
+		<th>Sunrise</th>
+		<td class="sunrise">/td>
+	</tr>
+	<tr>
+	<th>Sunset</th>
+		<td class="sunset">/td>
+	</tr>
+</table>
+
+<ul>
+	<li><a href="#" onclick="alert('asd')">METAR</a></li>
+	<li><a href="#" onclick="alert('asd')">OpenWetaherMap</a></li>
+	<li><a href="#" onclick="alert('asd')">DarkSky</a></li>
+	<li><a href="#" onclick="alert('asd')">AccuWeather</a></li>
+	<li><a href="#" onclick="alert('asd')">APIXU</a></li>
+	<li><a href="#" onclick="alert('asd')">Weatherbit</a></li>
+</ul>
+
+<ul>
+	<li><a href="#" onclick="app.current('lviv')">Lviv</a></li>
+	<li><a href="#" onclick="app.current('gologirky')">Gologirky</a></li>
+	<li><a href="#" onclick="app.current('4ornaripa')">Chorna Ripa</a></li>
+	<li><a href="#" onclick="app.current('lypnyky')">Lypnyky</a></li>
+	<li><a href="#" onclick="app.current('shopky')">Shopky</a></li>
+	<li><a href="#" onclick="app.current('parashka')">Parashka</a></li>
+	<li><a href="#" onclick="app.current('berdo')">Berdo</a></li>
+	<li><a href="#" onclick="app.current('tysovec')">Tysovec</a></li>
+	<li><a href="#" onclick="app.current('skole')">Skole</a></li>
+	<li><a href="#" onclick="app.current('volosianka')">Volosianka</a></li>
+	<li><a href="#" onclick="app.current('borzhava')">Borzhava</a></li>
+</ul>
+
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/Chart.min-2.7.0.js"></script>
+<script type="text/javascript" src="secret/owm.key.js"></script>
+<script type="text/javascript" src="js/providers.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>
