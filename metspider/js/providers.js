@@ -4,10 +4,10 @@ class Providers {
 	}
 }
 class ProviderConfig {
-	constructor(key, apiKey, providerName) {
+	constructor(key, apiKey, name) {
 		this.key = key;
 		this.apiKey = apiKey;
-		this.providerName = name;
+		this.name = name;
 	}
 	getApiKey() {
 		return this.apiKey;
