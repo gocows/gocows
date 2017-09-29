@@ -1,8 +1,11 @@
-class Providers {
-	OpenWeatherMap() {
-		return new ProviderConfig('openweathermap', OpenWeatherMapApiKey(), 'OpenWeatherMap');
-	}
-}
+Providers = function() {
+    return {
+        OpenWeatherMap : function() {
+            return new ProviderConfig('openweathermap', OpenWeatherMapApiKey(), 'OpenWeatherMap');
+        }
+    };
+};
+
 class ProviderConfig {
 	constructor(key, apiKey, name) {
 		this.key = key;

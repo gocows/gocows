@@ -1,4 +1,4 @@
-MetSpider = function() {
+var MetSpider = function() {
 
 	var providers = new Providers();
 	var places = new Places();
@@ -44,6 +44,7 @@ MetSpider = function() {
 			$('#current .place').text(place.name);
 			$.getJSON('http://api.openweathermap.org/data/2.5/weather?lat=' + place.lat + '&lon=' + place.lon + '&units=metric&appid=' + provider.apiKey, function(data) {
 				console.log(data);
+				$('#current').show();
 			 	$('#current .temp').text(data.main.temp);
 			 	$('#current .rh').text(data.main.humidity);
 			 	$('#current .pressure').text(data.main.pressure);
@@ -51,6 +52,7 @@ MetSpider = function() {
 			 	$('#current .wind_speed').text(data.wind.speed);
 			 	$('#current .wind_direction').text(directionName(parseInt(data.wind.deg)));
 			 	$('#current .visibility').text(data.visibility);
+			 	$('#current .city_name').text(data.id + ' ' + data.name);
 			 	$('#current .description').text(data.weather[0].description);
 			 	$('#current .sunrise').text(timestamp2Time(data.sys.sunrise));
 			 	$('#current .sunset').text(timestamp2Time(data.sys.sunset));
@@ -60,4 +62,4 @@ MetSpider = function() {
 	}
 };
 
-let app = new MetSpider();
+var app = new MetSpider();
