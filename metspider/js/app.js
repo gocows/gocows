@@ -35,6 +35,29 @@ var MetSpider = function() {
 	};
 	
 	return {
+		changeProvider : function(providerKey) {
+			$('#current_provider').val(providerKey);
+		},
+		
+		changePlace : function(placeKey) {
+			$('#current_place').val(placeKey);
+		},
+		
+		forecastOrCurrent: function(val) {
+			$('#is_forecast').val(val);
+		},
+		
+		loadProviders : function() {
+			$.each(providers.getAll(), function(index, provider) {
+				console.log(provider);
+				$('#providers').append('<li><a href="#" onclick="app.changeProvider(\'' + provider.apiKey + '\')">' + provider.name + '</a></li>');
+			});
+		},
+		
+		loadPlaces :function() {
+		
+		},
+		
 		current : function(placeKey) {
 			var provider = providers.OpenWeatherMap();
 			console.log(provider);
@@ -63,3 +86,8 @@ var MetSpider = function() {
 };
 
 var app = new MetSpider();
+
+$(document).ready(function() {
+	app.loadProviders();
+	app.loadPlaces();
+});

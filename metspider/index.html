@@ -11,7 +11,17 @@
 </head>
 <body>
 
-<table id="current">
+<ul id="switcher">
+	<li><a href="#">Current</a></li>
+	<li><a href="#">Forecast</a></li>
+</ul>
+
+<div id="viewport"></div>
+
+<table id="forecast_template">
+</table>
+
+<table id="current_weather_template">
 	<tr>
 		<th colspan="2">
 			<span class="place"></span>,
@@ -57,32 +67,36 @@
 	<td colspan="2" class="city_name"></td>
 </table>
 
-<ul>
-	<li><a href="#" onclick="app.current('lviv')">Lviv</a></li>
-	<li><a href="#" onclick="app.current('gologirky')">Gologirky</a></li>
-	<li><a href="#" onclick="app.current('chornaripa')">Chorna Ripa</a></li>
-	<li><a href="#" onclick="app.current('lypnyky')">Lypnyky</a></li>
-	<li><a href="#" onclick="app.current('shopky')">Shopky</a></li>
-	<li><a href="#" onclick="app.current('parashka')">Parashka</a></li>
-	<li><a href="#" onclick="app.current('berdo')">Berdo</a></li>
-	<li><a href="#" onclick="app.current('tysovec')">Tysovec</a></li>
-	<li><a href="#" onclick="app.current('skole')">Skole</a></li>
-	<li><a href="#" onclick="app.current('volosianka')">Volosianka</a></li>
-	<li><a href="#" onclick="app.current('borzhava')">Borzhava</a></li>
+
+
+<ul id="places">
+	<li><a href="#" onclick="app.changePlace('lviv')">Lviv</a></li>
+	<li><a href="#" onclick="app.changePlace('gologirky')">Gologirky</a></li>
+	<li><a href="#" onclick="app.changePlace('chornaripa')">Chorna Ripa</a></li>
+	<li><a href="#" onclick="app.changePlace('lypnyky')">Lypnyky</a></li>
+	<li><a href="#" onclick="app.changePlace('shopky')">Shopky</a></li>
+	<li><a href="#" onclick="app.changePlace('parashka')">Parashka</a></li>
+	<li><a href="#" onclick="app.changePlace('berdo')">Berdo</a></li>
+	<li><a href="#" onclick="app.changePlace('tysovec')">Tysovec</a></li>
+	<li><a href="#" onclick="app.changePlace('skole')">Skole</a></li>
+	<li><a href="#" onclick="app.changePlace('volosianka')">Volosianka</a></li>
+	<li><a href="#" onclick="app.changePlace('borzhava')">Borzhava</a></li>
 </ul>
 
-<ul>
-	<li><a href="#" onclick="alert('asd')">METAR</a></li>
-	<li><a href="#" onclick="alert('asd')">OpenWetaherMap</a></li>
-	<li><a href="#" onclick="alert('asd')">DarkSky</a></li>
-	<li><a href="#" onclick="alert('asd')">AccuWeather</a></li>
-	<li><a href="#" onclick="alert('asd')">APIXU</a></li>
-	<li><a href="#" onclick="alert('asd')">Weatherbit</a></li>
+<ul id="providers">
+	<!--<li><a href="#" onclick="app.changeProvider('metar')">METAR</a></li>
+	<li><a href="#" onclick="app.changeProvider('openweathermap')">OpenWetaherMap</a></li>
+	<li><a href="#" onclick="app.changeProvider('darksky')">DarkSky</a></li>
+	<li><a href="#" onclick="app.changeProvider('accuweather')">AccuWeather</a></li>
+	<li><a href="#" onclick="app.changeProvider('apixu')">APIXU</a></li>
+	<li><a href="#" onclick="app.changeProvider('weatherbit')">Weatherbit</a></li>
+	<li><a href="#" onclick="app.changeProvider('wunderground')">WUnderground</a></li>-->
 </ul>
 
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/Chart.min-2.7.0.js"></script>
 <script type="text/javascript" src="secret/owm.key.js"></script>
+<script type="text/javascript" src="secret/darksky.key.js"></script>
 <script type="text/javascript" src="js/providers.js"></script>
 <script type="text/javascript" src="js/places.js"></script>
 <script type="text/javascript" src="js/app.js"></script>

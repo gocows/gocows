@@ -1,7 +1,26 @@
 Providers = function() {
+	
+	var openWeatherMap = function() {
+		return new ProviderConfig('openweathermap', OpenWeatherMapApiKey(), 'OpenWeatherMap');
+	};
+	
+	var darkSky = function() {
+		return new ProviderConfig('darksky', DarkSkyApiKey(), 'DarkSky');
+	};
+	
+	var providers = [ openWeatherMap(), darkSky() ];
+	
     return {
-        OpenWeatherMap : function() {
-            return new ProviderConfig('openweathermap', OpenWeatherMapApiKey(), 'OpenWeatherMap');
+        openWeatherMap : function() {
+            return openWeatherMap();
+        },
+        
+        darkSky : function() {
+            return darkSky();
+        },
+        
+        getAll : function() {
+        	return providers;
         }
     };
 };
