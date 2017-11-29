@@ -11,14 +11,14 @@
 </head>
 <body>
 
-<ul id="switcher">
-	<li><a href="#">Current</a></li>
-	<li><a href="#">Forecast</a></li>
-</ul>
+<input type="hidden" id="current_provider" />
+<input type="hidden" id="current_place" />
 
-<div id="viewport"></div>
+<div id="current"></div>
+<div id="forecast"></div>
 
 <table id="forecast_template">
+<!--<canvas id="forecastCanvas" width="400" height="400"></canvas>-->
 </table>
 
 <table id="current_weather_template">
@@ -84,9 +84,9 @@
 </ul>
 
 <ul id="providers">
+	<li><a href="#" onclick="app.changeProvider('darksky')">DarkSky</a></li>
 	<!--<li><a href="#" onclick="app.changeProvider('metar')">METAR</a></li>
 	<li><a href="#" onclick="app.changeProvider('openweathermap')">OpenWetaherMap</a></li>
-	<li><a href="#" onclick="app.changeProvider('darksky')">DarkSky</a></li>
 	<li><a href="#" onclick="app.changeProvider('accuweather')">AccuWeather</a></li>
 	<li><a href="#" onclick="app.changeProvider('apixu')">APIXU</a></li>
 	<li><a href="#" onclick="app.changeProvider('weatherbit')">Weatherbit</a></li>

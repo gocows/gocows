@@ -37,49 +37,37 @@ var MetSpider = function() {
 	return {
 		changeProvider : function(providerKey) {
 			$('#current_provider').val(providerKey);
+			this.loadWeather();
+			
 		},
 		
 		changePlace : function(placeKey) {
 			$('#current_place').val(placeKey);
+			this.loadWeather();
 		},
 		
-		forecastOrCurrent: function(val) {
-			$('#is_forecast').val(val);
-		},
-		
-		loadProviders : function() {
-			$.each(providers.getAll(), function(index, provider) {
-				console.log(provider);
-				$('#providers').append('<li><a href="#" onclick="app.changeProvider(\'' + provider.apiKey + '\')">' + provider.name + '</a></li>');
-			});
-		},
-		
-		loadPlaces :function() {
-		
-		},
-		
-		current : function(placeKey) {
-			var provider = providers.OpenWeatherMap();
+		loadWeather : function() {
+			var providerKey = $('#current_provider').val();
+			var provider = providers.find(providerKey);
 			console.log(provider);
-			$('#current .provider').text(provider.name);
+			var placeKey = $('#current_place').val();
 			var place = places.find(placeKey);
 			console.log(place);
-			$('#current .place').text(place.name);
-			$.getJSON('http://api.openweathermap.org/data/2.5/weather?lat=' + place.lat + '&lon=' + place.lon + '&units=metric&appid=' + provider.apiKey, function(data) {
-				console.log(data);
-				$('#current').show();
-			 	$('#current .temp').text(data.main.temp);
-			 	$('#current .rh').text(data.main.humidity);
-			 	$('#current .pressure').text(data.main.pressure);
-			 	$('#current .clouds').text(data.clouds.all);
-			 	$('#current .wind_speed').text(data.wind.speed);
-			 	$('#current .wind_direction').text(directionName(parseInt(data.wind.deg)));
-			 	$('#current .visibility').text(data.visibility);
-			 	$('#current .city_name').text(data.id + ' ' + data.name);
-			 	$('#current .description').text(data.weather[0].description);
-			 	$('#current .sunrise').text(timestamp2Time(data.sys.sunrise));
-			 	$('#current .sunset').text(timestamp2Time(data.sys.sunset));
-			 	$('#current .dt').text(timestamp2Time(data.dt));
+			
+			$.getJSON('https://api.darksky.net/forecast/' + provider.apiKey + '/' + place.lat + ',' + place.lon + '?units=si&extend=hourly&callback=?', function(data) {
+				console.log(data.currently);
+				console.log(data.daily);
+				console.log(data.hourly);
+
+				$('#current').text(timestamp2Time(data.currently.time) + ': ' + data.currently.summary + ' ' + data.currently.temperature + ' C (dew point '
+					+ data.currently.dewPoint + ' C) ' + data.currently.humidity*100 + '% ' + data.currently.pressure + ' hPa '
+					+ data.currently.windSpeed + ' m/s ' + directionName(data.currently.windBearing) + ' (gusts ' + data.currently.windGust + ' m/s) '
+					+ 'Clouds:' + data.currently.cloudCover*100 + '% (' + data.currently.icon + ') ' 
+					+ data.currently.precipType + ' (' + data.currently.precipProbability*100 + '% '
+					+ data.currently.precipIntensity + ' mm/h) UV:' + data.currently.uvIndex
+					+ ' Ozone:' + data.currently.ozone);
+					
+//				var ctx = document.getElementById('forecastCanvas').getContext('2d');
 			});
 		}
 	}
@@ -88,6 +76,5 @@ var MetSpider = function() {
 var app = new MetSpider();
 
 $(document).ready(function() {
-	app.loadProviders();
-	app.loadPlaces();
+	//app.loadPlaces();
 });

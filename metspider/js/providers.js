@@ -1,27 +1,27 @@
 Providers = function() {
 	
-	var openWeatherMap = function() {
-		return new ProviderConfig('openweathermap', OpenWeatherMapApiKey(), 'OpenWeatherMap');
-	};
-	
 	var darkSky = function() {
 		return new ProviderConfig('darksky', DarkSkyApiKey(), 'DarkSky');
 	};
 	
-	var providers = [ openWeatherMap(), darkSky() ];
+	var providers = [ darkSky() ];
 	
     return {
-        openWeatherMap : function() {
-            return openWeatherMap();
-        },
-        
         darkSky : function() {
             return darkSky();
         },
         
         getAll : function() {
         	return providers;
-        }
+        },
+        
+		find : function(key) {
+			for (var index in providers) {
+				if (providers[index].key == key) {
+					return providers[index];
+				}
+			}
+		}
     };
 };
 
