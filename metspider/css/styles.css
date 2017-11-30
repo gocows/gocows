@@ -18,6 +18,6 @@ table, td, th {
 	color: red;
 	font-weight: bold;
 }
-#current_weather_template {
+#current_weather_template, #forecastCanvas {
 	display: none;
 }
