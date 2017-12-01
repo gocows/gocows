@@ -107,7 +107,14 @@ var MetSpider = function() {
 						text: 'Forecast in ' + place.name + ' (' + provider.name + ')',
 					},
 					chart: {
-						zoomType: 'xy'
+						zoomType: 'x'
+					},
+					plotOptions: {
+						spline: {
+							marker: {
+								radius: 1
+							}
+						}
 					},
 					xAxis: [{
 						categories: xAxisLabels,
