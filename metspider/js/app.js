@@ -78,7 +78,6 @@ var MetSpider = function() {
 				var hourlyWindSpeed = [];
 				var hourlyHumidity = [];
 				var hourlyWindGust = [];
-				var hourlyWindBearing = [];
 				var hourlyVisibility = [];
 				var hourlyUvIndex = [];
 				var hourlyPrecipIntensity = [];
@@ -89,11 +88,10 @@ var MetSpider = function() {
 					xAxisLabels[index] = timestamp2Date(data.hourly.data[index].time).substring(0, 4) + ' ' + timestamp2Time(data.hourly.data[index].time).substring(0, 5);
 					hourlyTemp[index] = data.hourly.data[index].temperature;
 					hourlyHumidity[index] = data.hourly.data[index].humidity*100;
-					hourlyWindSpeed[index] = data.hourly.data[index].windSpeed;
+					hourlyWindSpeed[index] = [data.hourly.data[index].windSpeed, data.hourly.data[index].windBearing];
 					hourlyPressure[index] = data.hourly.data[index].pressure;
 					hourlyDewPoint[index] = data.hourly.data[index].dewPoint;
 					hourlyWindGust[index] = data.hourly.data[index].windGust;
-					hourlyWindBearing[index] = data.hourly.data[index].windBearing;//
 					hourlyVisibility[index] = data.hourly.data[index].visibility;
 					hourlyUvIndex[index] = data.hourly.data[index].uvIndex;
 					hourlyPrecipIntensity[index] = data.hourly.data[index].precipIntensity;
@@ -101,15 +99,20 @@ var MetSpider = function() {
 					hourlyOzone[index] = data.hourly.data[index].ozone;//
 					hourlyCloudCover[index] = data.hourly.data[index].cloudCover*100;
 				}
+				console.log(hourlyWindSpeed);
 
 				$('#chartContainer').show();
 				Highcharts.chart('chartContainer', {
+					title: {
+						text: 'Forecast in ' + place.name + ' (' + provider.name + ')',
+					},
 					chart: {
 						zoomType: 'xy'
 					},
 					xAxis: [{
 						categories: xAxisLabels,
-						crosshair: true
+						crosshair: true,
+						offset: 40
 					}],
 					yAxis: [{
 						labels: {
@@ -265,7 +268,7 @@ var MetSpider = function() {
 					{
 						name: 'Visibility',
 						yAxis: 2,
-						type: 'spline',
+						type: 'column',
 						data: hourlyVisibility,
 						visible: false,
 						tooltip: {
@@ -293,9 +296,19 @@ var MetSpider = function() {
 						}
 					},
 					{
+						name: 'Wind Bearing',
+						type: 'windbarb',
+						data: hourlyWindSpeed,
+						visible: false,
+						tooltip: {
+							valueSuffix: ' m/s'
+						}
+					},
+					{
 						name: 'Wind Speed',
 						yAxis: 3,
-						type: 'spline',
+						keys: ['y', 'rotation'],
+						type: 'area',
 						data: hourlyWindSpeed,
 						visible: false,
 						tooltip: {
@@ -315,7 +328,7 @@ var MetSpider = function() {
 					{
 						name: 'Precipitation',
 						yAxis: 4,
-						type: 'spline',
+						type: 'column',
 						data: hourlyPrecipIntensity,
 						visible: false,
 						tooltip: {
@@ -325,7 +338,7 @@ var MetSpider = function() {
 					{
 						name: 'UV-Index',
 						yAxis: 5,
-						type: 'spline',
+						type: 'column',
 						data: hourlyUvIndex,
 						visible: false,
 						tooltip: {

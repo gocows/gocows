@@ -7,17 +7,9 @@
 .clear {
 	clear: both;
 }
-table, td, th {
-	border: 1px green solid;
-}
-#current th, #current td {
-	padding: 3px 10px;
-}
-.temp-red {
-	font-size: 1.2em;
-	color: red;
-	font-weight: bold;
-}
-#current_weather_template, #forecastCanvas {
+#chartContainer {
+	min-width: 750px;
+	min-height: 500px;
+	margin: 0 auto; 
 	display: none;
 }
