@@ -15,60 +15,9 @@
 <input type="hidden" id="current_place" />
 
 <div id="current"></div>
-<div id="forecast" style="width: 1000px; height: 500px;">
-<canvas id="forecastCanvas"></canvas>
+<div id="forecast">
+	<div id="chartContainer" style="min-width: 1010px; height: 700px; margin: 0 auto; display: none;"></div>
 </div>
-
-<table id="forecast_template">
-</table>
-
-<table id="current_weather_template">
-	<tr>
-		<th colspan="2">
-			<span class="place"></span>,
-			<span class="provider"></span>
-		</th>
-	</tr>
-	<tr>
-		<th class="description"></th>
-		<th><span class="temp temp-red"></span><span> °C</span></th>
-	</tr>
-	<tr>
-		<th>Humidity</th>
-		<td><span class="rh"></span><span> %</span></td>
-	</tr>
-	<tr>
-		<th>Pressure</th>
-		<td><span class="pressure"></span><span> hPa</span></td>
-	</tr>
-	<tr>
-		<th>Wind</th>
-		<td><span class="wind_speed"></span><span> m/s</span> from <span class="wind_direction"></span></td>
-	</tr>
-	<tr>
-		<th>Clouds</th>
-		<td><span class="clouds"></span><span> %</span></td>
-	</tr>
-	<tr>
-		<th>Visibility</th>
-		<td><span class="visibility"></span><span> m</span></td>
-	</tr>
-	<tr>
-		<th>Date</th>
-		<td class="dt">/td>
-	</tr>
-	<tr>
-		<th>Sunrise</th>
-		<td class="sunrise">/td>
-	</tr>
-	<tr>
-	<th>Sunset</th>
-		<td class="sunset">/td>
-	</tr>
-	<td colspan="2" class="city_name"></td>
-</table>
-
-
 
 <ul id="places">
 	<li><a href="#" onclick="app.changePlace('lviv')">Lviv</a></li>
@@ -95,7 +44,7 @@
 </ul>
 
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="js/Chart.min-2.7.0.js"></script>
+<script type="text/javascript" src="js/highcharts.js"></script>
 <script type="text/javascript" src="secret/owm.key.js"></script>
 <script type="text/javascript" src="secret/darksky.key.js"></script>
 <script type="text/javascript" src="js/providers.js"></script>

@@ -1,6 +1,5 @@
 var MetSpider = function() {
 
-	var chart = null;
 	var providers = new Providers();
 	var places = new Places();
 	var winds = [
@@ -73,124 +72,276 @@ var MetSpider = function() {
 					+ ' Ozone:' + data.currently.ozone);
 				
 				var xAxisLabels = [];
+				var hourlyTemp = [];
+				var hourlyDewPoint = [];
+				var hourlyPressure = [];
+				var hourlyWindSpeed = [];
+				var hourlyHumidity = [];
+				var hourlyWindGust = [];
+				var hourlyWindBearing = [];
+				var hourlyVisibility = [];
+				var hourlyUvIndex = [];
+				var hourlyPrecipIntensity = [];
+				var hourlyPrecipProbability = [];
+				var hourlyOzone = [];
+				var hourlyCloudCover = [];
 				for (var index in data.hourly.data) {
 					xAxisLabels[index] = timestamp2Date(data.hourly.data[index].time).substring(0, 4) + ' ' + timestamp2Time(data.hourly.data[index].time).substring(0, 5);
-				}
-				var hourlyTemp = [];
-				for (var index in data.hourly.data) {
 					hourlyTemp[index] = data.hourly.data[index].temperature;
-				}
-				
-				var hourlyDewPoint = [];
-				for (var index in data.hourly.data) {
-					hourlyDewPoint[index] = data.hourly.data[index].dewPoint;
-				}
-				
-				var hourlyPressure = [];
-				for (var index in data.hourly.data) {
-					hourlyPressure[index] = data.hourly.data[index].pressure;
-				}
-				
-				/*var hourlyWindSpeed = [];
-				for (var index in data.hourly.data) {
+					hourlyHumidity[index] = data.hourly.data[index].humidity*100;
 					hourlyWindSpeed[index] = data.hourly.data[index].windSpeed;
+					hourlyPressure[index] = data.hourly.data[index].pressure;
+					hourlyDewPoint[index] = data.hourly.data[index].dewPoint;
+					hourlyWindGust[index] = data.hourly.data[index].windGust;
+					hourlyWindBearing[index] = data.hourly.data[index].windBearing;//
+					hourlyVisibility[index] = data.hourly.data[index].visibility;
+					hourlyUvIndex[index] = data.hourly.data[index].uvIndex;
+					hourlyPrecipIntensity[index] = data.hourly.data[index].precipIntensity;
+					hourlyPrecipProbability[index] = data.hourly.data[index].precipProbability*100;
+					hourlyOzone[index] = data.hourly.data[index].ozone;//
+					hourlyCloudCover[index] = data.hourly.data[index].cloudCover*100;
 				}
-				
-				var hourlyHumidity = [];
-				for (var index in data.hourly.data) {
-					hourlyHumidity[index] = data.hourly.data[index].humidity;
-				}*/
-				
-				$('#forecastCanvas').show();
-				var ctx = document.getElementById('forecastCanvas').getContext('2d');
-				if (chart != null) {
-					chart.destroy();
-				}
-				chart = new Chart(ctx, {
-					type: 'line',
-					data: {
-						labels: xAxisLabels,
-						datasets: [{
-							label: 'Temperature',
-							data: hourlyTemp,
-							borderWidth: 4,
-							fill: false,
-							pointRadius: 0,
-							yAxisID: "y-axis-1",
-							borderColor: 'red'
-						},
-						{
-							label: 'Pressure',
-							data: hourlyPressure,
-							borderWidth: 4,
-							fill: false,
-							pointRadius: 0,
-							yAxisID: "y-axis-2",
-							borderColor: 'green'
-						},
-						/*{
-							label: 'Wind Speed',
-							data: hourlyWindSpeed,
-							borderWidth: 4,
-							fill: false,
-							pointRadius: 0,
-							yAxisID: "y-axis-3",
-							borderColor: 'yellow'
-						},*/
-						{
-							label: 'Dew Point',
-							data: hourlyDewPoint,
-							borderWidth: 4,
-							fill: false,
-							pointRadius: 0,
-							yAxisID: "y-axis-1",
-							borderColor: 'blue'
-						}]
+
+				$('#chartContainer').show();
+				Highcharts.chart('chartContainer', {
+					chart: {
+						zoomType: 'xy'
 					},
-					options: {
-						responsive: true,
-						hoverMode: 'index',
-						stacked: false,
-						title:{
-							display: true,
-							text:'Chart.js Line Chart - Multi Axis'
+					xAxis: [{
+						categories: xAxisLabels,
+						crosshair: true
+					}],
+					yAxis: [{
+						labels: {
+							format: '{value}°C',
+							style: {
+								color: Highcharts.getOptions().colors[1]
+							}
 						},
-						scales: {
-							yAxes: [{
-							    type: "linear", // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-							    display: true,
-							    position: "left",
-							    id: "y-axis-1",
-							},
-							/*{
-							    type: "linear", // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-							    display: true,
-							    position: "left",
-							    id: "y-axis-3",
-							},*/ {
-							    type: "linear", // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-							    display: true,
-							    position: "right",
-							    id: "y-axis-2",
-
-							    // grid line settings
-							    gridLines: {
-							        drawOnChartArea: false, // only want the grid lines for one axis to show up
-							    },
-							}/*,
-							{
-							    type: "linear", // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-							    display: true,
-							    position: "right",
-							    id: "y-axis-4",
-
-							    // grid line settings
-							    gridLines: {
-							        drawOnChartArea: false, // only want the grid lines for one axis to show up
-							    },
-							}*/],
+						title: {
+							text: 'Temperature',
+							style: {
+								color: Highcharts.getOptions().colors[1]
+							}
 						}
-					}
+					},
+					{
+						labels: {
+							format: '{value} hPa',
+							style: {
+								color: Highcharts.getOptions().colors[1]
+							}
+						},
+						title: {
+							text: 'Pressure',
+							style: {
+								color: Highcharts.getOptions().colors[1]
+							}
+						}
+					},
+					{
+						title: {
+							text: '%%',
+							style: {
+								color: Highcharts.getOptions().colors[0]
+							}
+						},
+						labels: {
+							format: '{value}%',
+							style: {
+								color: Highcharts.getOptions().colors[0]
+							}
+						},
+						opposite: true
+					},
+					{
+						title: {
+							text: 'Wind Speed',
+							style: {
+								color: Highcharts.getOptions().colors[0]
+							}
+						},
+						labels: {
+							format: '{value} m/s',
+							style: {
+								color: Highcharts.getOptions().colors[0]
+							}
+						},
+						opposite: true
+					},
+					{
+						title: {
+							text: 'Precipitation',
+							style: {
+								color: Highcharts.getOptions().colors[0]
+							}
+						},
+						labels: {
+							format: '{value} mm/h',
+							style: {
+								color: Highcharts.getOptions().colors[0]
+							}
+						},
+						opposite: true
+					},
+					{
+						title: {
+							text: 'UV-Index',
+							style: {
+								color: Highcharts.getOptions().colors[0]
+							}
+						},
+						labels: {
+							format: '{value}',
+							style: {
+								color: Highcharts.getOptions().colors[0]
+							}
+						},
+						opposite: true
+					},
+					{
+						title: {
+							text: 'Ozone',
+							style: {
+								color: Highcharts.getOptions().colors[0]
+							}
+						},
+						labels: {
+							format: '{value}',
+							style: {
+								color: Highcharts.getOptions().colors[0]
+							}
+						},
+						opposite: true
+					}],
+					tooltip: {
+						shared: true
+					},
+					legend: {
+						layout: 'horizontal',
+						align: 'center',
+						verticalAlign: 'bottom',
+						backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+					},
+					series: [
+					{
+						name: 'Temperature',
+						yAxis: 0,
+						type: 'spline',
+						data: hourlyTemp,
+						tooltip: {
+							valueSuffix: '°C'
+						}
+					},
+					{
+						name: 'Dew point',
+						yAxis: 0,
+						type: 'spline',
+						data: hourlyDewPoint,
+						visible: false,
+						tooltip: {
+							valueSuffix: '°C'
+						}
+					},
+					{
+						name: 'Pressure',
+						yAxis: 1,
+						type: 'spline',
+						data: hourlyPressure,
+						tooltip: {
+							valueSuffix: ' hPa'
+						}
+					},
+					{
+						name: 'Humidity',
+						yAxis: 2,
+						type: 'spline',
+						data: hourlyHumidity,
+						visible: false,
+						tooltip: {
+							valueSuffix: '%'
+						}
+					},
+					{
+						name: 'Visibility',
+						yAxis: 2,
+						type: 'spline',
+						data: hourlyVisibility,
+						visible: false,
+						tooltip: {
+							valueSuffix: '%'
+						}
+					},
+					{
+						name: 'Precip Probability',
+						yAxis: 2,
+						type: 'spline',
+						data: hourlyPrecipProbability,
+						visible: false,
+						tooltip: {
+							valueSuffix: '%'
+						}
+					},
+					{
+						name: 'Cloud Cover',
+						yAxis: 2,
+						type: 'spline',
+						data: hourlyCloudCover,
+						visible: false,
+						tooltip: {
+							valueSuffix: '%'
+						}
+					},
+					{
+						name: 'Wind Speed',
+						yAxis: 3,
+						type: 'spline',
+						data: hourlyWindSpeed,
+						visible: false,
+						tooltip: {
+							valueSuffix: ' m/s'
+						}
+					},
+					{
+						name: 'Wind Gust',
+						yAxis: 3,
+						type: 'spline',
+						data: hourlyWindGust,
+						visible: false,
+						tooltip: {
+							valueSuffix: ' m/s'
+						}
+					},
+					{
+						name: 'Precipitation',
+						yAxis: 4,
+						type: 'spline',
+						data: hourlyPrecipIntensity,
+						visible: false,
+						tooltip: {
+							valueSuffix: ' mm/h'
+						}
+					},
+					{
+						name: 'UV-Index',
+						yAxis: 5,
+						type: 'spline',
+						data: hourlyUvIndex,
+						visible: false,
+						tooltip: {
+							valueSuffix: ''
+						}
+					},
+					{
+						name: 'Ozone',
+						yAxis: 6,
+						type: 'spline',
+						data: hourlyOzone,
+						visible: false,
+						tooltip: {
+							valueSuffix: ''
+						}
+					}]
 				});
 			});
 		}
