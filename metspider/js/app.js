@@ -156,7 +156,6 @@ var MetSpider = function() {
 					xAxis: [{
 						type: 'datetime',
 						crosshair: true,
-						offset: 40,
 						plotBands: xPlotBands
 					}],
 					yAxis: [{
