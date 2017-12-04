@@ -51,7 +51,7 @@ var MetSpider = function() {
 		},
 		
 		loadWeather : function() {
-			var providerKey = $('#current_provider').val();
+			var providerKey = 'darksky';//$('#current_provider').val();
 			var provider = providers.find(providerKey);
 			console.log(provider);
 			var placeKey = $('#current_place').val();
