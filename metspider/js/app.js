@@ -58,7 +58,7 @@ var MetSpider = function() {
 			var place = places.find(placeKey);
 			console.log(place);
 			
-			$.getJSON('https://api.darksky.net/forecast/' + provider.apiKey + '/' + place.lat + ',' + place.lon + '?units=si&extend=hourly&callback=?', function(data) {
+			$.getJSON('https://api.darksky.net/forecast/' + provider.apiKey + '/' + place.lat + ',' + place.lon + '?units=si&lang=es&extend=hourly&callback=?', function(data) {
 				console.log(data.currently);
 				console.log(data.daily);
 				console.log(data.hourly);
