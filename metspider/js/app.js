@@ -21,6 +21,16 @@ var MetSpider = function() {
 		['NNW', 327, 348]
 	];
 	
+	var espanolDias = {
+		Mon: 'Lun',
+		Tue: 'Mar',
+		Wed: 'Mie',
+		Thu: 'Jue',
+		Fri: 'Vie',
+		Sat: 'Sab',
+		Sun: 'Dom'
+	};
+	
 	var timestamp2Time = function(timestamp) {
 		return new Date(timestamp*1000).toLocaleTimeString();
 	};
@@ -121,7 +131,7 @@ var MetSpider = function() {
 					    from: times.sunrise,
 					    to: times.sunset,
 					label: {
-						text: times.sunrise.toString().substring(0, 3),
+						text: espanolDias[times.sunrise.toString().substring(0, 3)],
 						style: {
 						    color: '#606060'
 						}
@@ -136,12 +146,18 @@ var MetSpider = function() {
 				$('#chartContainer').show();
 				Highcharts.setOptions({
 				    global: {
-					useUTC: false
+						useUTC: false
+				    },
+				    lang: {
+						loading: 'Cargando...',
+						months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+						weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+						shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
 				    }
 				});
 				Highcharts.chart('chartContainer', {
 					title: {
-						text: 'Forecast in ' + place.name + ' (' + provider.name + ')',
+						text: 'Tiempo en ' + place.name + ' (' + provider.name + ')',
 					},
 					chart: {
 						zoomType: 'x'
@@ -166,7 +182,7 @@ var MetSpider = function() {
 							}
 						},
 						title: {
-							text: 'Temperature',
+							text: 'Temperatura',
 							style: {
 								color: Highcharts.getOptions().colors[1]
 							}
@@ -293,7 +309,7 @@ var MetSpider = function() {
 					},
 					{
 						title: {
-							text: 'Wind Speed',
+							text: 'Velocidad del viento',
 							style: {
 								color: Highcharts.getOptions().colors[0]
 							}
@@ -308,7 +324,7 @@ var MetSpider = function() {
 					},
 					{
 						title: {
-							text: 'Precipitation',
+							text: 'Precipitación',
 							style: {
 								color: Highcharts.getOptions().colors[0]
 							}
@@ -362,7 +378,7 @@ var MetSpider = function() {
 					},
 					series: [
 					{
-						name: 'Temperature',
+						name: 'Temperatura',
 						yAxis: 0,
 						type: 'spline',
 						data: hourlyTemp,
@@ -371,7 +387,7 @@ var MetSpider = function() {
 						}
 					},
 					{
-						name: 'Dew point',
+						name: 'Punto de rocío',
 						yAxis: 0,
 						type: 'spline',
 						data: hourlyDewPoint,
@@ -381,7 +397,7 @@ var MetSpider = function() {
 						}
 					},
 					{
-						name: 'Pressure',
+						name: 'Presión',
 						yAxis: 1,
 						type: 'spline',
 						data: hourlyPressure,
@@ -390,7 +406,7 @@ var MetSpider = function() {
 						}
 					},
 					{
-						name: 'Humidity',
+						name: 'Humedad',
 						yAxis: 2,
 						type: 'spline',
 						data: hourlyHumidity,
@@ -400,7 +416,7 @@ var MetSpider = function() {
 						}
 					},
 					{
-						name: 'Visibility',
+						name: 'Visibilidad',
 						yAxis: 2,
 						type: 'column',
 						data: hourlyVisibility,
@@ -410,7 +426,7 @@ var MetSpider = function() {
 						}
 					},
 					{
-						name: 'Precip Probability',
+						name: 'Probabilidad de precipitación',
 						yAxis: 2,
 						type: 'spline',
 						data: hourlyPrecipProbability,
@@ -420,7 +436,7 @@ var MetSpider = function() {
 						}
 					},
 					{
-						name: 'Cloud Cover',
+						name: 'Nubes',
 						yAxis: 2,
 						type: 'spline',
 						data: hourlyCloudCover,
@@ -430,7 +446,7 @@ var MetSpider = function() {
 						}
 					},
 					{
-						name: 'Wind Bearing',
+						name: 'Dirección del viento',
 						type: 'windbarb',
 						data: hourlyWindBearing,
 						visible: false,
@@ -440,7 +456,7 @@ var MetSpider = function() {
 						onSeries: 'wind-speed-series'
 					},
 					{
-						name: 'Wind Speed',
+						name: 'Velocidad del viento',
 						yAxis: 3,
 						type: 'area',
 						data: hourlyWindSpeed,
@@ -462,7 +478,7 @@ var MetSpider = function() {
 						},
 					},
 					{
-						name: 'Wind Gust',
+						name: 'Rafagas del viento',
 						yAxis: 3,
 						type: 'spline',
 						data: hourlyWindGust,
@@ -472,7 +488,7 @@ var MetSpider = function() {
 						}
 					},
 					{
-						name: 'Precipitation',
+						name: 'Precipitación',
 						yAxis: 4,
 						type: 'column',
 						data: hourlyPrecipIntensity,
