@@ -205,7 +205,7 @@ var MetSpider = function() {
 						{
 							value: -10,
 							color: 'blue',
-							dashStyle: 'dot',
+							dashStyle: 'LongDashDotDot',
 							label : {
 								text: '-10°C'
 							},
@@ -220,7 +220,7 @@ var MetSpider = function() {
 						{
 							value: -20,
 							color: 'blue',
-							dashStyle: 'dot',
+							dashStyle: 'LongDash',
 							label : {
 								text: '-20°C'
 							},
@@ -235,7 +235,7 @@ var MetSpider = function() {
 						{
 							value: 10,
 							color: 'red',
-							dashStyle: 'dot',
+							dashStyle: 'LongDashDotDot',
 							label : {
 								text: '10°C'
 							},
@@ -250,7 +250,7 @@ var MetSpider = function() {
 						{
 							value: 20,
 							color: 'red',
-							dashStyle: 'dot',
+							dashStyle: 'LongDash',
 							label : {
 								text: '20°C'
 							},
@@ -265,7 +265,7 @@ var MetSpider = function() {
 						{
 							value: 30,
 							color: 'red',
-							dashStyle: 'dot',
+							dashStyle: 'LongDash',
 							label : {
 								text: '30°C'
 							},
@@ -290,6 +290,18 @@ var MetSpider = function() {
 							color: 'red',
 							dashStyle: 'solid',
 							width: 1
+						},
+						{
+							value: 1038.25,
+							color: 'red',
+							dashStyle: 'solid',
+							width: 3
+						},
+						{
+							value: 993.25,
+							color: 'blue',
+							dashStyle: 'solid',
+							width: 3
 						}]
 					},
 					{
@@ -305,7 +317,37 @@ var MetSpider = function() {
 								color: Highcharts.getOptions().colors[0]
 							}
 						},
-						opposite: true
+						opposite: true,
+						plotLines: [{
+							value: 50,
+							color: 'grey',
+							dashStyle: 'solid',
+							width: 1
+						},
+						{
+							value: 70,
+							color: 'grey',
+							dashStyle: 'solid',
+							width: 2
+						},
+						{
+							value: 90,
+							color: 'grey',
+							dashStyle: 'solid',
+							width: 4
+						},
+						{
+							value: 20,
+							color: 'green',
+							dashStyle: 'dot',
+							width: 3
+						},
+						{
+							value: 40,
+							color: 'green',
+							dashStyle: 'DashDot',
+							width: 3
+						}]
 					},
 					{
 						title: {
@@ -335,7 +377,19 @@ var MetSpider = function() {
 								color: Highcharts.getOptions().colors[0]
 							}
 						},
-						opposite: true
+						opposite: true,
+						plotLines: [{
+							value: 0.7,
+							color: 'maroon',
+							dashStyle: 'solid',
+							width: 2
+						},
+						{
+							value: 0.3,
+							color: 'maroon',
+							dashStyle: 'solid',
+							width: 2
+						}]
 					},
 					{
 						title: {
